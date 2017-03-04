@@ -1,0 +1,65 @@
+#1.Considering the cube function defined as
+        cube <- function(x,n){x^3}
+#What is the result of running cube(3)
+#Number 27 is returned because n is not evaluated
+
+#2.The following code will produce a warning in R, why?
+        x <- 1:10
+        if(x > 5){x <- 0}
+#y is a vector of lenght 10 and if can only test a single logical statement
+
+#3.Consider function f. If we run z <- 10; f(3), what value is returned?
+        f <- function(x){
+                g <- function(y){y + z}
+                z <- 4
+                x + g(x)
+                        
+        }
+#10 is the correct answer
+        
+#4.Consider the expression. 
+#What is the value of y after eveluating this expression?
+        x <- 5
+        y <- if(x<3){NA}else{10}
+#The correct answer is 10
+        
+#5.Consider the following R function
+        h <- function(x, y = NULL, d = 3L) {
+                z <- cbind(x, d)
+                if(!is.null(y))
+                        z <- z + y
+                else
+                        z <- z + f
+                g <- x + y / z
+                if(d == 3L)
+                        return(g)
+                g <- g + 10
+                g
+        }
+#The only free variable in the function is "f"
+
+#6.What is an environment in R? A collection of symbol/value pairs
+#An environment is just a place to store variables – a set of bindings between 
+#symbols and objects. (https://www.r-bloggers.com/environments-in-r/)
+        
+#7.The R language uses what type of scoping rule for resolving free variables?
+#Lexical scoping is the correct answer.
+#When a function in R uses a 'free' variable, a variable that is not defined 
+#in the function nor an argument of the function, where R finds the value of 
+#the variable can be confusing. Intuitively, we might expect R to use dynamic 
+#scoping: the value is found where it is defined in the environment where the 
+#function is called or in the nearest environment above that. However, R does 
+#not work this way. It uses lexical scoping in which the sequence of 
+#environments to look in is determined when the function is defined, but the 
+#value is determined when the function is called.
+#(http://wiki.math.yorku.ca/index.php/R:_Scoping_of_free_variable_names)
+        
+#8.How are free variables in R functions resolved?
+#The values of free variables are searched for in the environment in which the 
+#function was defined (see previous explanation)
+
+#9.What is one of the consequences of the scoping rules used in R?
+#All objects must be stored in memory (review video from lesson)
+
+#10.In R what is the parent frame?
+#It is the evironment in wich the function was called (review from lesson)
