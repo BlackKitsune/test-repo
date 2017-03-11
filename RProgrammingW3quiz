@@ -1,0 +1,94 @@
+#Week 3 Quiz
+
+#1.Take a look at the 'iris' dataset that comes with R. 
+#The data can be loaded with the code:
+
+library(datasets)
+data(iris)
+
+#A description of the dataset can be found by running
+
+?iris
+        
+#There will be an object called 'iris' in your workspace. 
+#In this dataset, what is the mean of 'Sepal.Length' for the species virginica?
+#Please round your answer to the nearest whole number.
+
+##iris is a data frame with 150 cases (rows) and 5 variables (columns) named 
+#Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, and Species.
+
+str(iris)       #Info of iris variables
+head(iris)      #First 6 lines of the iris dataset
+View(iris)      #Open the iris dataset in the editor
+
+#Extract the data from Species = "virginica" to a subset of iris
+virginica <- subset(iris,Species == "virginica")
+
+summary(virginica)      #Statistical information for every column
+mean(virginica$Sepal.Length)    #Mean value of the Sepal.length column 
+round(mean(virginica$Sepal.Length))     #round value
+
+
+#2.Continuing with the 'iris' dataset from the previous Question, 
+#what R code returns a vector of the means of the variables 'Sepal.Length', 
+#'Sepal.Width', 'Petal.Length', and 'Petal.Width'?
+
+apply(iris, 1, mean)
+apply(iris, 2, mean)
+rowMeans(iris[, 1:4])
+apply(iris[, 1:4], 1, mean)
+colMeans(iris)
+apply(iris[, 1:4], 2, mean) #Correct
+
+#3.Load the 'mtcars' dataset in R with the following code
+
+library(datasets)
+data(mtcars)
+
+#There will be an object names 'mtcars' in your workspace. 
+#You can find some information about the dataset by running
+
+?mtcars
+
+#How can one calculate the average miles per gallon (mpg) by number 
+#of cylinders in the car (cyl)? Select all that apply.
+
+sapply(split(mtcars$mpg, mtcars$cyl), mean)     #Correct
+tapply(mtcars$mpg, mtcars$cyl, mean)            #correct
+tapply(mtcars$cyl, mtcars$mpg, mean)
+sapply(mtcars, cyl, mean)
+split(mtcars, mtcars$cyl)
+mean(mtcars$mpg, mtcars$cyl)
+with(mtcars, tapply(mpg, cyl, mean))            #Correct
+apply(mtcars, 2, mean)
+lapply(mtcars, mean)
+
+#4.Continuing with the 'mtcars' dataset from the previous Question, 
+#what is the absolute difference between the average horsepower of 
+#4-cylinder cars and the average horsepower of 8-cylinder cars?
+
+#(Please round your final answer to the nearest whole number. 
+#Only enter the numeric result and nothing else.)
+
+diff <- tapply(mtcars$hp, mtcars$cyl, mean)
+round(abs(diff[3]-diff[1]))
+
+#OR 
+
+abs(mean(mtcars$hp[mtcars$cyl==4])-mean(mtcars$hp[mtcars$cyl==8]))
+
+#5 If you run
+
+debug(ls)
+
+#what happens when you next call the 'ls' function?
+
+# a) The 'ls' function will return an error.
+# b) The 'ls' function will execute as usual.
+# c) Execution of 'ls' will suspend at the beginning of the 
+#    function and you will be in the browser.---> Correct
+# d) You will be prompted to specify at which line of the function 
+#    you would like to suspend execution and enter the browser.
+
+#If you run ls() after that you enter in the debugging browser
+#To exit Q and C in the Browser>
